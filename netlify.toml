@@ -1,0 +1,10 @@
+# Only used for the optional "Netlify frontend + Render server" setup (see DEPLOYMENT.md).
+# Set VITE_SERVER_URL in Netlify's environment variables to your Render URL.
+[build]
+  command = "npm run build"
+  publish = "client/dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -55,3 +55,13 @@ PORT=3001 npm start   # serves the built client and the Socket.IO server
 ```
 
 The server keeps state in memory, so run a **single instance** (or use sticky sessions plus a shared Socket.IO adapter).
+
+See **[DEPLOYMENT.md](DEPLOYMENT.md)** for free hosting on Render, or Netlify + Render.
+
+Optional environment variables:
+
+| Variable | Where | Purpose |
+|---|---|---|
+| `PORT` | server | Listen port (default `3001`) |
+| `CORS_ORIGIN` | server | Comma-separated allowed origins, only needed when the client is hosted elsewhere |
+| `VITE_SERVER_URL` | client build | Socket.IO server URL, only needed when the client is hosted elsewhere |

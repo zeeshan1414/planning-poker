@@ -13,7 +13,10 @@ export function useRoom(roomId, enabled) {
 
   useEffect(() => {
     if (!enabled) return undefined;
-    const socket = io({ transports: ['websocket', 'polling'] });
+    // VITE_SERVER_URL is only set when the client is hosted separately from the server (e.g. Netlify + Render).
+    const opts = { transports: ['websocket', 'polling'] };
+    const serverUrl = import.meta.env.VITE_SERVER_URL;
+    const socket = serverUrl ? io(serverUrl, opts) : io(opts);
     socketRef.current = socket;
 
     // Re-sent on every (re)connect; the seed lets the facilitator's browser restore the

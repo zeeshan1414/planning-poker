@@ -21,6 +21,7 @@ export function createServer({
   clientDist = path.resolve(__dirname, '../../client/dist'),
   roomTtlMs = 6 * HOUR,
   sweepIntervalMs = 5 * 60 * 1000,
+  corsOrigin = process.env.CORS_ORIGIN,
 } = {}) {
   const rooms = new RoomManager();
   const app = express();
@@ -34,7 +35,11 @@ export function createServer({
   }
 
   const server = http.createServer(app);
-  const io = new Server(server, { maxHttpBufferSize: 256 * 1024 });
+  const io = new Server(server, {
+    maxHttpBufferSize: 256 * 1024,
+    // Only needed when the client is served from a different origin (comma-separated list).
+    cors: corsOrigin ? { origin: corsOrigin.split(',').map((o) => o.trim()) } : undefined,
+  });
 
   function broadcast(roomId) {
     const socketIds = io.sockets.adapter.rooms.get(roomId);
