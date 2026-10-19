@@ -13,6 +13,17 @@ Real-time story-point estimation with a Fibonacci deck (`1 2 3 5 8 13 21 ? ☕`)
 - Observer (non-voting) mode, switchable at any time
 - Round history, plus JSON export
 - Facilitator handoff ("make facilitator"), or "Become facilitator" if the facilitator leaves
+- English and Japanese (日本語) UI: auto-detected from the browser language, switchable from the language menu, and remembered per browser
+
+### Adding a language
+
+Translations live in `client/src/lib/messages.js`:
+
+1. Add the language to `LANGUAGES`.
+2. Add a `messages.<code>` block with every English key.
+3. Add server error translations under `serverErrors` and `fieldErrors`.
+
+`npm test` fails if any key, placeholder or server error message is missing.
 
 ## How persistence works
 
@@ -44,7 +55,7 @@ Requires Node `^20.19` or `>=22.12`.
 ```bash
 npm install
 npm run dev        # server on :3001, Vite on :5173 (proxies /socket.io)
-npm test           # server unit + socket integration tests
+npm test           # server tests + client i18n tests
 ```
 
 ## Production

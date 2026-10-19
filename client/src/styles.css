@@ -9,7 +9,7 @@
   --danger: #c0392b;
   --ok: #16a34a;
   --radius: 12px;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', Meiryo, sans-serif;
   color: var(--text);
   background: var(--bg);
 }
@@ -55,6 +55,9 @@ label.checkbox input { width: auto; }
 .hint { font-size: 0.85rem; color: var(--muted); }
 .error { color: var(--danger); }
 .row { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+.row.spread { justify-content: space-between; }
+.lang-select { font: inherit; font-size: 0.9rem; padding: 0.4rem 0.5rem; border: 1px solid var(--border); border-radius: 8px; background: var(--panel); color: var(--text); cursor: pointer; }
+.hero-top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .code { font-family: ui-monospace, monospace; background: var(--accent-soft); color: var(--accent); padding: 0.1rem 0.4rem; border-radius: 6px; font-size: 0.85rem; }
 .badge { font-size: 0.75rem; background: var(--accent-soft); color: var(--accent); padding: 0.1rem 0.5rem; border-radius: 999px; }
 .chip { display: inline-flex; gap: 0.3rem; align-items: center; background: var(--bg); border-radius: 999px; padding: 0.2rem 0.6rem; font-size: 0.85rem; }

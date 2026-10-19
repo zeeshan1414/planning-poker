@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useI18n } from '../lib/i18n.jsx';
 
 export default function FacilitatorControls({ round, participants, send }) {
+  const { t } = useI18n();
   const [nextStory, setNextStory] = useState('');
   const voterCount = participants.filter((p) => p.role === 'voter').length;
 
@@ -12,19 +14,17 @@ export default function FacilitatorControls({ round, participants, send }) {
   return (
     <div className="panel controls">
       <div className="row">
-        <span className="muted">
-          {round.votedCount} of {voterCount} voted
-        </span>
+        <span className="muted">{t('controls.voted', { voted: round.votedCount, total: voterCount })}</span>
         <button className="primary" disabled={round.revealed || round.votedCount === 0} onClick={() => send('reveal')}>
-          Reveal votes
+          {t('controls.reveal')}
         </button>
         <button disabled={round.votedCount === 0 && !round.revealed} onClick={() => send('resetVotes')}>
-          Reset votes
+          {t('controls.reset')}
         </button>
       </div>
       <form className="row" onSubmit={next}>
-        <input value={nextStory} onChange={(e) => setNextStory(e.target.value)} maxLength={200} placeholder="Next story title (optional)" />
-        <button type="submit">Next round →</button>
+        <input value={nextStory} onChange={(e) => setNextStory(e.target.value)} maxLength={200} placeholder={t('controls.nextPlaceholder')} />
+        <button type="submit">{t('controls.next')}</button>
       </form>
     </div>
   );

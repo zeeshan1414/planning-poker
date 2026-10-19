@@ -1,26 +1,25 @@
+import { useI18n } from '../lib/i18n.jsx';
+
 export default function Stats({ stats }) {
+  const { t } = useI18n();
   const maxCount = Math.max(...stats.distribution.map((d) => d.count), 1);
+  const cells = [
+    ['stats.average', stats.average],
+    ['stats.suggested', stats.suggested],
+    ['stats.min', stats.min],
+    ['stats.max', stats.max],
+  ];
 
   return (
     <div className="panel stats">
-      {stats.consensus && <div className="consensus">🎉 Consensus!</div>}
+      {stats.consensus && <div className="consensus">{t('stats.consensus')}</div>}
       <div className="stat-grid">
-        <div>
-          <span className="stat-value">{stats.average ?? '–'}</span>
-          <span className="muted">Average</span>
-        </div>
-        <div>
-          <span className="stat-value">{stats.suggested ?? '–'}</span>
-          <span className="muted">Suggested</span>
-        </div>
-        <div>
-          <span className="stat-value">{stats.min ?? '–'}</span>
-          <span className="muted">Min</span>
-        </div>
-        <div>
-          <span className="stat-value">{stats.max ?? '–'}</span>
-          <span className="muted">Max</span>
-        </div>
+        {cells.map(([key, value]) => (
+          <div key={key}>
+            <span className="stat-value">{value ?? '–'}</span>
+            <span className="muted">{t(key)}</span>
+          </div>
+        ))}
       </div>
       <div className="distribution">
         {stats.distribution.map((d) => (
